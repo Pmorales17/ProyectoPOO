@@ -1,0 +1,49 @@
+body{
+    background: beige;
+}
+.buttons{
+    margin: 5px;
+    padding: 5px 5px 5px 20px;
+    border: 1px solid #aaa;
+}
+.buttons .close{
+    background: #6666ff;
+    color: white;
+}
+.buttons .edit{
+    background: #656eff;
+    color: black;
+}
+.buttons .eliminate{
+    background: #ff0000;
+    color: black;
+}
+.barramenu{
+    background: #999999;
+}
+.buttons .barra{
+    background: #ffffff;
+    color: black;
+}
+.buttons .barra2{
+    background: #cccccc;
+    color: black;
+}
+.columna1{
+    background: lightblue;
+}
+.columna2 {
+    background: lightcoral;
+}
+.columna3{
+    background: lightgreen;
+}
+
+.panelGridCenter {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.widthInputText {
+    width: 96%; 
+}

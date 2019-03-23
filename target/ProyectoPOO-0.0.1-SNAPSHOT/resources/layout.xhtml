@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:loadBundle basename=".com.i18N.Bundle" var="msg"/>
+
+    <h:head>        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="/css/style.css"/>
+        <ui:insert name="head"></ui:insert>
+        <title>
+            <ui:insert name="title">#{msg.system}</ui:insert>
+        </title>
+    </h:head>   
+
+    <h:body>
+        <f:view contentType="text/html">
+            <h:form>
+                <p:growl id="messages" autoUpdate="true"></p:growl>
+                <div id="top" class="buttons" align="center" style="background-color: white">
+                    <h2>
+                        <h:outputText value="¡#{msg.welcome} #{sessionBacking.usuario.email}!" style="color: black"/>
+                    </h2>
+                    <p:commandButton action="#{sessionBacking.logout()}" value="#{msg.closesession}" styleClass="close"></p:commandButton>                   
+                    <br/>
+                    <br/>
+                    <p:menubar class="barramenu">
+                        <p:submenu label="#{msg.users}" styleClass="barra">
+                            <p:menuitem value="#{msg.list}" url="/usuarios/index.xhtml" />
+                            <p:menuitem value="#{msg.new}" url="/usuarios/new.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{msg.objectives}" styleClass="barra2">
+                            <p:menuitem value="#{msg.list}" url="/objetivos/index.xhtml" />
+                            <p:menuitem value="#{msg.new}" url="/objetivos/new.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{msg.ambits}" styleClass="barra">
+                            <p:menuitem value="#{msg.list}" url="/ambitos/index.xhtml" />
+                            <p:menuitem value="#{msg.new}" url="/ambitos/new.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{msg.strategics}" styleClass="barra2">
+                            <p:menuitem value="#{msg.list}" url="/lineas/index.xhtml" />
+                            <p:menuitem value="#{msg.new}" url="/lineas/new.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{msg.calls}" styleClass="barra">
+                            <p:menuitem value="#{msg.list}" url="/convocatorias/index.xhtml" />
+                            <p:menuitem value="#{msg.new}" url="/convocatorias/new.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{msg.impacts}" styleClass="barra2">
+                            <p:menuitem value="#{msg.list}" url="/impactos/index.xhtml" />
+                            <p:menuitem value="#{msg.new}" url="/impactos/new.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{msg.simple}" styleClass="barra">
+                            <p:menuitem value="#{msg.list}" url="/actividades/simples/index.xhtml" />
+                            <p:menuitem value="#{msg.new}" url="/actividades/simples/new.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{msg.compound}" styleClass="barra2">
+                            <p:menuitem value="#{msg.list}" url="/actividades/compuestas/index.xhtml" />
+                            <p:menuitem value="#{msg.new}" url="/actividades/compuestas/new.xhtml" />
+                        </p:submenu>
+                    </p:menubar>                    
+                    <ui:insert name="top"></ui:insert>
+                </div>
+
+                <div id="content" class="center_content">
+                    <ui:insert name="content"> </ui:insert>
+                </div>
+
+                <div id="bottom">
+                    <ui:insert name="bottom"></ui:insert>
+                </div>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/resources/layout.xhtml">
+    
+    <f:loadBundle basename=".com.i18N.Bundle" var="msg"/>
+
+    <ui:define name="content">
+        <div align="center">
+        <h2>#{msg.newdatalines}</h2>
+        <br />
+        <p:panelGrid columns="2" styleClass="panelGridCenter">
+            <p:outputLabel value="#{msg.name}"></p:outputLabel>
+            <p:inputText id="nombre"
+                         value="#{lineaBacking.lineaEstrategica.nombre}"
+                         styleClass="widthInputText"/>
+        </p:panelGrid>
+        <br/>
+        <p:commandButton value="#{msg.save}" action="#{lineaBacking.create()}" />
+        <p:button value="#{msg.cancel}" outcome="/lineas/index"/>
+        </div>
+    </ui:define>
+</ui:composition>
+

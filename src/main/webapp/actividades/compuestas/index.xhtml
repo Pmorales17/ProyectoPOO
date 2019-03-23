@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/resources/layout.xhtml">
+    
+    <f:loadBundle basename=".com.i18N.Bundle" var="msg"/>
+
+    <ui:define name="content">
+        <p:dataTable id="compuestas" value="#{compuestaBacking.allCompuestas}" var="compuesta" emptyMessage="No existen datos registrados">
+            <p:column headerText="Actividad">
+                <h:outputText value="#{compuesta.nombre}"/>
+            </p:column>
+            
+            <p:column headerText="Fecha Inicio">
+                <h:outputText value="#{compuesta.fechaInicio}"/>
+            </p:column>            
+
+            <p:column headerText="Fecha Fin">
+                <h:outputText value="#{compuesta.fechaFin}"/>
+            </p:column>   
+
+            <p:column headerText="Expediente">
+                <h:outputText value="#{compuesta.expediente}"/>
+            </p:column>   
+            
+            <p:column headerText="Resolucion">
+                <h:outputText value="#{compuesta.resolucion}"/>
+            </p:column>          
+            
+            <p:column>
+                <h:link outcome="/actividades/compuestas/edit" value="Editar">
+                    <f:param name="id" value="#{compuesta.getId()}" />
+                </h:link>
+            </p:column>
+            <p:column>
+                <p:commandLink actionListener="#{compuestaBacking.delete(compuesta)}" value="Eliminar" update="compuestas">
+                </p:commandLink>
+            </p:column>
+        </p:dataTable>
+        <p:button value="Nueva" outcome="/actividades/compuestas/new"/>
+
+
+        <p:confirmDialog showEffect="fade" hideEffect="fade">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </p:confirmDialog>
+    </ui:define>
+</ui:composition>

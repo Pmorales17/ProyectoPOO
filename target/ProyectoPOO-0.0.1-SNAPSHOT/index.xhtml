@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <f:loadBundle basename=".com.i18N.Bundle" var="msg"/>
+
+    <h:head>
+        <title>#{msg.welcomeHeading}</title>
+        <h:outputStylesheet name="/css/style.css"/>
+    </h:head>
+
+    <h:body style="text-align: center">
+        <h:form id="myform">
+            <p:growl id="mensajes" />
+            <div align="center" draggable="false">
+                <br/><br/>
+                <h:outputText value="#{msg.welcomeHeading}" />
+                <br/><br/>
+                <h1>#{msg.ingress}</h1>
+                <br/><br/>
+                <p:panel header="#{msg.putdata}" style="width: 400px">
+                    <h:panelGrid columns="2">                    
+                        <h:outputLabel value="#{msg.users}" />
+                        <p:inputText id="user" required="true" label="username"
+                                     requiredMessage="#{msg.nousers}" value="#{sessionBacking.email}"  />
+                        <h:outputLabel value="#{msg.password}" />
+                        <p:password id="pass" required="true" label="password" 
+                                    requiredMessage="#{msg.nopassword}" value="#{sessionBacking.password}" />
+                        <div align="center" draggable="false">          
+                            <p:commandButton id="loginButton" value="#{msg.login}" icon="" update="mensajes" action="#{sessionBacking.login()}" />
+                        </div>
+                    </h:panelGrid>
+                </p:panel>             
+            </div>
+        </h:form>
+    </h:body>
+</html>

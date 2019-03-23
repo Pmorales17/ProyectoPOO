@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/resources/layout.xhtml">
+
+    <f:loadBundle basename=".com.i18N.Bundle" var="msg"/>
+
+    <ui:define name="head">
+        <f:metadata>
+            <f:viewParam name="id" value="#{impactoBacking.impacto}"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <div align="center">
+            <h2>#{msg.updateimpact}</h2>
+            <br />
+            <p:panelGrid columns="2" style="margin-bottom:10px" styleClass="panelGridCenter">
+                <p:outputLabel value="#{msg.weight}: "></p:outputLabel>
+                <p:inputText required="true" requiredMessage="#{msg.alertweight}" id="peso" 
+                             value="#{impactoBacking.impacto.peso}"
+                             styleClass="widthInputText"/>
+
+                <p:outputLabel for="objetivo" value="#{msg.objectives}: "></p:outputLabel>
+                <p:selectOneMenu required="true" requiredMessage="#{msg.alertobjective}" id="objetivo" 
+                                 value="#{impactoBacking.impacto.objetivo}">
+                    <f:selectItem itemLabel="#{msg.pickobjective}" itemValue="" ></f:selectItem>                    
+                    <f:selectItems value="#{objetivoBacking.allObjetivos}" var="objetivos" itemLabel="#{objetivos.nombre}" ></f:selectItems>
+                </p:selectOneMenu>
+            </p:panelGrid> 
+            <br/>
+            <p:commandButton value="#{msg.update}" action="#{impactoBacking.update()}" update="messages" />
+            <p:button value="#{msg.cancel}" outcome="/impactos/index"/>
+        </div>
+    </ui:define>
+</ui:composition>

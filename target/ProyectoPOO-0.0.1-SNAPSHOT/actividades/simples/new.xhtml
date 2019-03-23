@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/resources/layout.xhtml">
+    
+    <f:loadBundle basename=".com.i18N.Bundle" var="msg"/>
+
+    <ui:define name="content">
+        <div align="center">
+
+            <br />
+            <h2>Ingrese los datos de la nueva Actividad</h2>         
+
+            <p:panelGrid columns="2" styleClass="panelGridCenter">
+                <p:outputLabel value="#{msg.name}" ></p:outputLabel>
+                <p:inputText id="nombre"
+                             required="true"
+                             requiredMessage="Debe ingresar el nombre de la Actividad"
+                             value="#{simpleBacking.simple.nombre}"
+                             styleClass="widthInputText"/>
+            </p:panelGrid>
+
+            <p:panelGrid columns="4" styleClass="panelGridCenter">
+                <p:outputLabel value="#{msg.indate}: "></p:outputLabel>       
+                <p:calendar id="fechainicio"
+                            value="#{simpleBacking.simple.fechaInicio}"
+                            styleClass="widthInputText"/>
+                <p:outputLabel value="#{msg.enddate}:"></p:outputLabel>
+                <p:calendar id="fechafin"
+                            value="#{simpleBacking.simple.fechaFin}"
+                            styleClass="widthInputText"/>                  
+            </p:panelGrid>
+
+            <p:panelGrid columns="2" styleClass="panelGridCenter">
+                <p:outputLabel value="#{msg.resolution}"></p:outputLabel>
+                <p:inputText id="resolucion"
+                             value="#{simpleBacking.simple.resolucion}"
+                             styleClass="widthInputText" />            
+            </p:panelGrid>
+
+            <p:panelGrid columns="2" styleClass="panelGridCenter">
+                <p:outputLabel value="#{msg.file}"></p:outputLabel>
+                <p:inputText id="expediente"
+                             value="#{simpleBacking.simple.expediente}"
+                             styleClass="widthInputText"/>  
+            </p:panelGrid>
+
+            <p:panelGrid columns="2" styleClass="panelGridCenter">
+                <p:outputLabel for="convocatoria" value="#{msg.call}: " ></p:outputLabel>
+                <p:selectOneMenu required="true" requiredMessage="#{msg.alertcall}" id="convocatoria" 
+                                 value="#{simpleBacking.simple.convocatoria}" style="width: 95%">
+                    <f:selectItem itemLabel="#{msg.selectcall}" itemValue="" ></f:selectItem>                    
+                    <f:selectItems value="#{convocatoriaBacking.allConvocatorias}"
+                                   var="convocatorias"
+                                   itemLabel="#{convocatorias.nombre}" ></f:selectItems>
+                </p:selectOneMenu>
+            </p:panelGrid>
+
+            <p:panelGrid columns="2" styleClass="panelGridCenter">
+                <p:outputLabel for="ambito" value="#{msg.ambit}: "></p:outputLabel>
+                <p:selectOneMenu required="true" requiredMessage="#{msg.alertambit}" id="ambito" 
+                                 value="#{simpleBacking.simple.ambito}"
+                                 style="width: 95%">
+                    <f:selectItem itemLabel="#{msg.selectambit}" itemValue="" ></f:selectItem>                    
+                    <f:selectItems value="#{ambitoBacking.allAmbitos}" var="ambitos" itemLabel="#{ambitos.nombre}" ></f:selectItems>
+                </p:selectOneMenu>
+            </p:panelGrid>
+
+            <p:panelGrid columns="2" styleClass="panelGridCenter">
+                <p:outputLabel for="linea" value="#{msg.line}: "></p:outputLabel>
+                <p:selectOneMenu required="true" requiredMessage="#{msg.alertline}" id="linea" 
+                                 value="#{simpleBacking.simple.lineaEstrategica}"
+                                 style="width: 95%">
+                    <f:selectItem itemLabel="#{msg.selectline}" itemValue="" ></f:selectItem>                    
+                    <f:selectItems value="#{lineaBacking.allLineasEstrategicas}" var="lineas" itemLabel="#{lineas.nombre}" ></f:selectItems>
+                </p:selectOneMenu>
+            </p:panelGrid>        
+
+            <br /> 
+            <h2>#{msg.selectobj}</h2>
+
+            <p:panelGrid columns="2" styleClass="panelGridCenter">
+
+                <p:outputLabel value="#{msg.objective}"></p:outputLabel>
+                <p:selectOneMenu value="#{simpleBacking.impacto.objetivo}"
+                                 style="width: 95%">
+                    <f:selectItem itemLabel="#{msg.selectobj2}" itemValue="" ></f:selectItem>
+                    <f:selectItems value="#{simpleBacking.allObjetivos}" 
+                                   var="objetivo" itemLabel="#{objetivo.nombre}"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="#{msg.weight}"></p:outputLabel>
+                <p:inputText value="#{simpleBacking.impacto.peso}" styleClass="widthInputText"/>
+
+                <p:commandButton value="#{msg.addimpact}" 
+                                 actionListener="#{simpleBacking.addImpacto()}"
+                                 update="messages,actividad_impactos"/>
+
+                <p:dataTable id="actividad_impactos" value="#{simpleBacking.simple.impactos}" var="impacto" emptyMessage="Ingresar al menos un Impacto">
+                    <p:column headerText="#{msg.objective}">#{impacto.objetivo}</p:column>
+                    <p:column headerText="#{msg.weight}">#{impacto.peso}</p:column>
+                    <p:column>
+                        <p:commandLink actionListener="#{simpleBacking.removeImpacto(impacto)}" 
+                                       value="#{msg.remove}" 
+                                       update="actividad_impactos"/>
+                    </p:column>      
+                </p:dataTable>
+
+            </p:panelGrid>  
+
+            <br /> 
+            <h2>#{msg.selectuser}</h2>                    
+
+            <p:panelGrid columns="2" styleClass="panelGridCenter">
+                <p:outputLabel value="#{msg.user}"></p:outputLabel>
+                <p:selectOneMenu value="#{simpleBacking.usuario}"
+                                 style="width: 95%">
+                    <f:selectItem itemLabel="#{msg.selectuser2}" itemValue="" ></f:selectItem>
+                    <f:selectItems value="#{simpleBacking.allUsuarios}" 
+                                   var="usuario" itemLabel="#{usuario.email}"/>
+                </p:selectOneMenu>
+
+                <p:commandButton value="#{msg.adduser}" 
+                                 actionListener="#{simpleBacking.addUsuario()}"
+                                 update="messages,actividad_usuarios"/>
+
+                <p:dataTable id="actividad_usuarios" value="#{simpleBacking.simple.responsables}" var="usuario" emptyMessage="Ingresar al menos un Responsable">
+                    <p:column headerText="#{msg.user}">#{usuario.email}</p:column>
+                    <p:column>
+                        <p:commandLink actionListener="#{simpleBacking.removeUsuario(usuario)}" 
+                                       value="#{msg.delete}" 
+                                       update="actividad_usuarios"/>
+                    </p:column>      
+                </p:dataTable>
+            </p:panelGrid>  
+            <br /> 
+            <p:commandButton value="#{msg.save}" action="#{simpleBacking.create()}" />
+            <p:button value="#{msg.cancel}" outcome="/actividades/simples/index"/> 
+        </div>
+    </ui:define>
+</ui:composition>
+
+

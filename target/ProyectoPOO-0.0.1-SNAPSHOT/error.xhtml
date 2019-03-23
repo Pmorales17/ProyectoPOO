@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <f:loadBundle basename=".com.i18N.Bundle" var="msg"/>
+
+    <head>
+        <title>#{msg.nowelcomeTitle}</title>
+    </head>
+
+    <body>
+        <h1><div>#{msg.nowelcomeHeading}</div></h1>
+        <br/><br/>
+        <h:form>
+            <h:commandButton value="#{msg.login}" styleClass="close" action="/index" />
+        </h:form>
+    </body>
+</html>
